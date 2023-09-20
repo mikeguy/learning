@@ -1,5 +1,5 @@
 from appium import webdriver
-from appium.options.ios import XCUITestOptions
+
 
 #need to teach our script where the app is located
 from os import path
@@ -17,22 +17,16 @@ APP = path.join(CUR_DIR, 'TheApp.app.zip')
 APPIUM = "http://localhost:4723"
 
 #define capabilities dictonary
-#CAPS = {
-#    "platformName": "iOS",
-#    "appium:options": {
-#        "platformVersion": "16.4",
-#        "deviceName": "iPhone 14",
-#        "automationName": "XCUITest",
-#        "app": APP
-#  }
-#}
-
-options = XCUITestOptions()
-options.platform_name= "iOS"
-options.device_name= "iPhone 14"
-options.automation_name = "XCUITest"
-options.app = APP
+CAPS = {
+    "platformName": "iOS",
+    "appium:options": {
+        "platformVersion": "16.4",
+        "deviceName": "iPhone 14",
+        "automationName": "XCUITest",
+        "app": APP
+  }
+}
 
 
-driver = webdriver.Remote(command_executor=APPIUM, options=options)
+driver = webdriver.Remote(command_executor=APPIUM, options=CAPS)
 driver.quit()
