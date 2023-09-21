@@ -1,4 +1,5 @@
-import time
+#finding and interacting with elements
+
 from appium import webdriver
 
 #need to improt this to get the locator strategies to use
@@ -35,20 +36,39 @@ appium_server_url = 'http://localhost:4723'
 options = XCUITestOptions()
 options.platformName = "iOS"
 options.platformVersion = "16.4"
-options.deviceName = "iPhone 8"
+options.deviceName = "iPhone 14"
 options.automationName = "XCUITest"
 options.app = APP
 
 driver = webdriver.Remote(APPIUM, options=options)
 
 
-try:
-     
-    #not sure why static wait needs to be used here instead of  wait = WebDriverWait(driver, 10)? are we not waiting for 10 seconds here?
-    time.sleep(4)
-    #print the page source of the app
-    print(driver.page_source)
+try: 
+    #we need to wait some time for all elements to load
+    wait = WebDriverWait(driver, 10)
+    
+    #wait for the "echo box element" and click to go to the next field
+    wait.until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID,'Echo Box'))).click()
+    
+    #wait for the input field and type "Hello" in it
+    wait.until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, "messageInput"))).send_keys("Hello")
 
+    #click the save button
+    driver.find_element(AppiumBy.ACCESSIBILITY_ID, "messageSaveBtn").click()
+
+    #assert that the "hello" text is displayed
+    saved_text= driver.find_element(AppiumBy.ACCESSIBILITY_ID, "savedMessage").text
+    assert saved_text == "Hello"
+
+    #go back to the main screen
+    driver.back()
+
+    #go back to the eco box view (good idea to wait again because of transition views)
+    wait.until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID,'Echo Box'))).click()
+
+    #assert that the "hello" text is still displayed
+    saved_text= wait.until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, "savedMessage"))).text
+    assert saved_text == "Hello"
 
 finally:
     driver.quit()
