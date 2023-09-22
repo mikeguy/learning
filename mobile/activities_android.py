@@ -1,5 +1,6 @@
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
+import time
 
 #need to teach our script where the app is located
 from os import path
@@ -31,15 +32,20 @@ options.app = APP
 driver = webdriver.Remote(APPIUM, options=options)
 
 app = path.join(CUR_DIR, "ApiDemos.apk")
-# run this in the command line: apkanalyzer -h manifest application-id ./ApiDemos.apk to get the package ID or use Android APK analizer app
 app_id = "io.appium.android.apis"
+app_act1 = ".graphics.TOuchPaint"
+app_act2 = ".text.Marquee"
 
 try: 
-
-    driver.remove_app(app_id)
     driver.install_app(app)
-    driver.activate_app(app_id)
-    driver.terminate_app(app_id)
     
+    #very fast way to accelerate the testing because you do not need to navigate to the location where you want to test
+    #if you add . appium knows to add pakage loaded
+    #driver.start_activity(app_id, app_act1)
+    driver.startActivity(app_id, app_act1)
+    time.sleep(1)
+    driver.start_session(app_id, app_act2)
+    time.sleep(1)
+
 finally:
     driver.quit()
