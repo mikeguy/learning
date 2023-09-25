@@ -8,10 +8,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 class HomeView(object):
+    ECHO_ITEM = (AppiumBy.ACCESSIBILITY_ID,'Echo Box')
+
+    def __init__(self,driver):
+        self.driver = driver
     
     def nav_to_echo_box(self): 
-        #we need to wait some time for all elements to load
-        wait = WebDriverWait(driver, 10)
-        
+
         #wait for the "echo box element" and click to go to the next field
-        wait.until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID,'Echo Box'))).click()
+        wait.until(expected_conditions.presence_of_element_located((self.ECHO_ITEM))).click()
