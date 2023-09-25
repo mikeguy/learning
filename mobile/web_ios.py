@@ -20,7 +20,7 @@ options.platformName = "iOS"
 options.platformVersion = "16.4"
 options.deviceName = "iPhone 14"
 options.automationName = "XCUITest"
-options.app = "Safari"
+
 
 driver = webdriver.Remote(APPIUM, options=options)
 

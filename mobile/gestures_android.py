@@ -62,5 +62,7 @@ try:
 
     driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Stratocumulus")
 
+
+
 finally:
     driver.quit()
