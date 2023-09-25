@@ -1,10 +1,7 @@
-from views.home_view import HomeView
+from views.home_view import HomeView #importing the classes from home_view
 from appium.webdriver.common.appiumby import AppiumBy #need to improt this to get the locator strategies to use
-
 from selenium.webdriver.support.wait import WebDriverWait #need to improt this to get the webdriver wait function
-
-#need to import this to set the expected conditions for the webdriver
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions #need to import this to set the expected conditions for the webdriver
 
 #PyTest looks for functions that becing with test_
 def test_echo_box(driver):
@@ -13,7 +10,7 @@ def test_echo_box(driver):
     home.nav_to_echo_box()
 
     #we need to wait some time for all elements to load
-    wait = WebDriverWait(self.driver, 10)
+    wait = WebDriverWait(driver, 10)
 
     #wait for the input field and type "Hello" in it
     wait.until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, "messageInput"))).send_keys("Hello")
