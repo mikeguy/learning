@@ -15,11 +15,11 @@ class EchoView(object):
         wait = WebDriverWait(self.driver, 10)
         wait.until(expected_conditions.presence_of_element_located((self.MESSAGE_INPUT))).send_keys(message)
         #click the save button
-        self.driver.find_element(self.SAVE_BUTTON).click()
+        self.driver.find_element(*self.SAVE_BUTTON).click()
 
     def read_message(self):
         #assert that the "hello" text is displayed
-        return self.driver.find_element(self.MESSAGE_LABEL).text    
+        return self.driver.find_element(*self.MESSAGE_LABEL).text    
         
     def nav_back(self):
         self.driver.back()
