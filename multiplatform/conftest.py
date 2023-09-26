@@ -34,7 +34,7 @@ ANDROID_CAPS = UiAutomator2Options().load_capabilities({
     })
 
 def pytest_addoption(parser):
-    parser.addoption('--platform', action="store". default="ios")
+    parser.addoption("--platform", action="store", default="ios")
 
 @pytest.fixture
 def platform(request):

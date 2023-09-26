@@ -6,7 +6,7 @@ class BaseView(object):
 
     def __init__(self,driver):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 5)
 
     def wait_for(self, locator):
         return self.wait.until(expected_conditions.presence_of_element_located((locator)))
