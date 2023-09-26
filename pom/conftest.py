@@ -2,7 +2,7 @@ from appium import webdriver #need to teach our script where the app is located
 from os import path
 import pytest #import this to set expected conditions for the appium XCUItest options
 from appium.options.ios import XCUITestOptions
-
+from views.home_view import HomeView
 
 #absolute path to directory where app is, variable, __file__ is a magic variable where the file is encountered
 CUR_DIR = path.dirname(path.abspath(__file__))
@@ -28,3 +28,6 @@ def driver():
 
     #exectue below code after test has completed
     driver.quit()
+@pytest.fixture
+def home(driver):
+    return HomeView(driver)
