@@ -27,9 +27,9 @@ IOS_CAPS = XCUITestOptions().load_capabilities({
 
 ANDROID_CAPS = UiAutomator2Options().load_capabilities({
     "platformName" : "Android",
-    "platformVersion" : "13",
+    #"platformVersion" : "13",
     "automationName" : "UiAutomator2",
-    "deviceName" : "Appium Test",
+    #"deviceName" : "Appium Test",
     "app" : ANDROID_APP,
     })
 
@@ -60,4 +60,4 @@ def driver(platform):
 
 @pytest.fixture
 def home(driver):
-    return HomeView(driver)
+    return HomeView.instance(driver)

@@ -1,4 +1,9 @@
 #PyTest looks for functions that begin with test_
+def test_saved_message_is_initially_empty(home):
+    echo = home.nav_to_echo_box()
+    assert echo.read_message() is None
+
+
 def test_echo_box(home):
     echo = home.nav_to_echo_box()
 
@@ -10,6 +15,3 @@ def test_echo_box(home):
     echo = home.nav_to_echo_box()
     assert echo.read_message() == message
 
-def test_saved_message_is_initially_empty(home):
-    echo = home.nav_to_echo_box()
-    assert echo.read_message() is None

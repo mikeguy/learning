@@ -6,7 +6,7 @@ class EchoView(BaseView):
     # = (locator strategy, selector)
     MESSAGE_INPUT = (AppiumBy.ACCESSIBILITY_ID, "messageInput")
     SAVE_BUTTON = (AppiumBy.ACCESSIBILITY_ID, "messageSaveBtn")
-    MESSAGE_LABEL = (AppiumBy.ACCESSIBILITY_ID, "savedMessage")
+    
 
     
     
@@ -25,4 +25,14 @@ class EchoView(BaseView):
     def nav_back(self):
         from views.home_view import HomeView
         self.driver.back()
-        return HomeView(self.driver)
+        return HomeView.instance(self.driver)
+    
+class EchoViewIOS(EchoView):
+    MESSAGE_LABEL = (AppiumBy.ACCESSIBILITY_ID, "savedMessage")
+
+class EchoViewAndroid(EchoView):
+    MESSAGE_LABEL = (AppiumBy.XPATH, "//android.widget.TextView[@content-desc != '']")
+
+
+EchoView._IOS = EchoViewIOS
+EchoView._ANDROID = EchoViewAndroid

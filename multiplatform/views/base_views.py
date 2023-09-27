@@ -13,3 +13,10 @@ class BaseView(object):
     
     def find(self, locator):
         return self.driver.find_element(*locator)
+    
+    @classmethod
+    def instance (cls, driver):
+        android_cls = getattr(cls, '_ANDROID', cls)
+        ios_cls = getattr(cls, "_IOS", cls)
+        actual_cls = ios_cls if driver._platform == "ios" else android_cls
+        return actual_cls(driver)

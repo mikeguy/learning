@@ -7,4 +7,5 @@ class HomeView(BaseView):
     
     def nav_to_echo_box(self): 
         self.wait_for(self.ECHO_ITEM).click()
-        return EchoView(self.driver)
+        return EchoView.instance(self.driver)
+    
